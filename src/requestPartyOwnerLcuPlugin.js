@@ -17,6 +17,7 @@ export default class RequestPartyOwnerLcuPlugin extends LCUPlugin {
     return this.createPromise((resolve, reject) => {
       this.getCurrentSummoner().then((summonerId) => {
         this.subscribeEvent(CONVERSATIONS_EVENT, this.handleLobbyChat(summonerId));
+        this.log('is ready');
         resolve();
       }).catch((error) => {
         reject(error);
@@ -35,7 +36,7 @@ export default class RequestPartyOwnerLcuPlugin extends LCUPlugin {
       resolve(resp.data.summonerId);
     }).catch((error) => {
       if ((error.code !== 'ECONNREFUSED' && error?.response?.status >= 500) || retriesLeft <= 0) {
-        console.log('error in getting current summoner', error);
+        this.log('error in getting current summoner', error);
         reject(error);
       }
       setTimeout(() => {
@@ -66,23 +67,23 @@ export default class RequestPartyOwnerLcuPlugin extends LCUPlugin {
       if (event.eventType !== 'Create') {
         return;
       }
-      // console.log('received party chat: ', event);
+      // this.log('received party chat: ', event);
       if (event.data.type !== 'groupchat') {
         return;
       }
-      // console.log('received party chat: ', event);
+      // this.log('received party chat: ', event);
       if (!/king me/i.test(event.data.body)) {
-        console.log(`RequestPartyOwner, ignoring message "${event.data.body}" because it didn't match the regex`);
+        // this.log(`RequestPartyOwner, ignoring message "${event.data.body}" because it didn't match the regex`);
         return;
       }
       const players = await this.getLobbyMembers();
       if (!this.amLeader(currentSummonerId, players)) {
-        console.log('Ignoring request to promote, since I am not party leader');
+        this.log('Ignoring request to promote, since I am not party leader');
         return;
       }
       const summonerId = event.data.fromSummonerId;
       if (!this.canPromote(players, summonerId)) {
-        console.log(`player ${summonerId} isn't in the party or is already the leader`);
+        this.log(`player ${summonerId} isn't in the party or is already the leader`);
         return;
       }
 
