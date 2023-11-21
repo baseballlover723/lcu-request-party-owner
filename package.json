@@ -1,0 +1,30 @@
+{
+  "name": "lcu-request-party-owner-plugin",
+  "version": "1.0.0",
+  "description": "Request to be made party owner",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baseballlover723/lcu-request-party-owner-plugin.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/requestPartyOwnerLcuPlugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"**/*.js\""
+  },
+  "dependencies": {
+    "axios": "^1.6.1",
+    "lcu-plugin": "1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0"
+  },
+  "keywords": [],
+  "author": "baseballlover723",
+  "license": "GPL3"
+}
