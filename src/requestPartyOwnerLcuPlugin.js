@@ -1,4 +1,4 @@
-import LCUPlugin from 'lcu-plugin';
+import LcuPlugin from 'lcu-plugin';
 import axios from 'axios';
 
 const CURRENT_SUMMONER_ENDPOINT = 'lol-summoner/v1/current-summoner';
@@ -10,7 +10,7 @@ const PROMOTE_ENDPOINTS = {
 
 const CONVERSATIONS_EVENT = 'OnJsonApiEvent_lol-chat_v1_conversations';
 
-export default class RequestPartyOwnerLcuPlugin extends LCUPlugin {
+export default class RequestPartyOwnerLcuPlugin extends LcuPlugin {
   onConnect(clientData) {
     axios.defaults.baseURL = `${clientData.protocol}://${clientData.address}:${clientData.port}`;
     axios.defaults.auth = { username: clientData.username, password: clientData.password };
